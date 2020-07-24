@@ -1,0 +1,32 @@
+## RNA-seq Asgmt
+
+### Code for Cerebellum
+
+```{r}
+[rhughes@cbix2 ~]$ mkdir rnaseq_asgmt
+[rhughes@cbix2 rnaseq_asgmt]$ cp -R /mnt/data/encode_tissue_data/cerebellum* /home/rhughes/rnaseq_asgmt/cerebellum
+[rhughes@cbix2 rnaseq_asgmt]$ cd rnaseq_asgmt/cerebellum/
+[rhughes@cbix2 cerebellum]$ mkdir fastqc
+[rhughes@cbix2 cerebellum]$ fastqc *.fastq.gz -o fastqc/
+[rhughes@cbix2 rnaseq_asgmt]$ mkdir data
+[rhughes@cbix2 rnaseq_asgmt]$ mkdir analysis
+[rhughes@cbix2 rnaseq_asgmt]$ mv cerebellum data
+[rhughes@cbix2 data]$ mkdir ../analysis/01_trim_cerebellum
+[rhughes@cbix2 analysis]$ mkdir 02_align_cerebellum
+[rhughes@cbix2 analysis]$ mkdir 03_count_cerebellum
+```
+### Code for Frontal Cortex
+
+```{r}
+[rhughes@cbix2 rnaseq_asgmt]$ cp -R /mnt/data/encode_tissue_data/frontal_cortex* /home/rhughes/rnaseq_asgmt/frontal_cortex
+[rhughes@cbix2 rnaseq_asgmt]$ mv frontal_cortex data
+[rhughes@cbix2 data]$ cd frontal_cortex
+[rhughes@cbix2 frontal_cortex]$ mkdir fastqc
+[rhughes@cbix2 frontal_cortex]$ fastqc *.fastq.gz -o fastqc/
+[rhughes@cbix2 frontal_cortex]$ cd ../
+[rhughes@cbix2 data]$ mkdir ../analysis/01_trim_frontal_cortex
+[rhughes@cbix2 analysis]$ mkdir 02_align_frontal_cortex
+[rhughes@cbix2 analysis]$ mkdir 03_count_frontal_cortex
+```
+
+
