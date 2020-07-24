@@ -18,7 +18,8 @@
 [rhughes@cbix2 data]$ cd ../analysis/
 [rhughes@cbix2 analysis]$ mkdir 02_align_cerebellum
 [rhughes@cbix2 analysis]$ mkdir 03_count_cerebellum
-
+[rhughes@cbix2 analysis]$ cd ../data/
+[rhughes@cbix2 data]$ for i in *R1.fastq.gz; do trim_galore --paired --fastqc --illumina --output /home/rhughes/rnaseq_asgmt/analysis/01_trim_cerebellum/ --retain_unpaired -q 30 $i ${i/R1/R2}; done
 ```
 ### Code for Frontal Cortex
 
@@ -34,7 +35,8 @@
 [rhughes@cbix2 data]$ cd ../analysis/
 [rhughes@cbix2 analysis]$ mkdir 02_align_frontal_cortex
 [rhughes@cbix2 analysis]$ mkdir 03_count_frontal_cortex
-
+[rhughes@cbix2 analysis]$ ../data/
+[rhughes@cbix2 data]$ for i in *R1.fastq.gz; do trim_galore --paired --fastqc --illumina --output /home/rhughes/rnaseq_asgmt/analysis/01_trim_frontal_cortex/ --retain_unpaired -q 30 $i ${i/R1/R2}; done
 ```
 
 
