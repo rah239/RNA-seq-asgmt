@@ -2,41 +2,113 @@
 
 ### Code for Cerebellum
 
-```{r}
+# Make assignment directory 
 [rhughes@cbix2 ~]$ mkdir rnaseq_asgmt
+
+# Go to Assignment folder
 [rhughes@cbix2 ~]$ cd rnaseq_asgmt/
+
+# Copy sample data to assignment directory
 [rhughes@cbix2 rnaseq_asgmt]$ cp -R /mnt/data/encode_tissue_data/cerebellum* /home/rhughes/rnaseq_asgmt/cerebellum
+
+#Go to cerebellum directory
 [rhughes@cbix2 rnaseq_asgmt]$ cd cerebellum/
+
+#Make folder to put the output in 
 [rhughes@cbix2 cerebellum]$ mkdir fastqc
+
+#run fastqc with a loop
 [rhughes@cbix2 cerebellum]$ fastqc *.fastq.gz -o fastqc/
+
+#Change directory back to assigment 
 [rhughes@cbix2 cerebellum]$ cd ../
+
+#Make data directory
 [rhughes@cbix2 rnaseq_asgmt]$ mkdir data
+
+#Make analysis directoy
 [rhughes@cbix2 rnaseq_asgmt]$ mkdir analysis
+
+#Move cerebellum directory into the data directory
 [rhughes@cbix2 rnaseq_asgmt]$ mv cerebellum data
+
+#Change directory to data
 [rhughes@cbix2 data]$ cd data/
+
+#Make a folder in the analysis folder to put the trimmed reads in
 [rhughes@cbix2 data]$ mkdir ../analysis/01_trim_cerebellum
+
+#Change directory to anaylsis
 [rhughes@cbix2 data]$ cd ../analysis/
+
+#Make a new directory to put the aligned files in
 [rhughes@cbix2 analysis]$ mkdir 02_align_cerebellum
+
+#Make a directory to put the count tables in 
 [rhughes@cbix2 analysis]$ mkdir 03_count_cerebellum
+
+#Change directory to data
 [rhughes@cbix2 analysis]$ cd ../data/
+
+#trim with trim galore
 [rhughes@cbix2 data]$ for i in *R1.fastq.gz; do trim_galore --paired --fastqc --illumina --output /home/rhughes/rnaseq_asgmt/analysis/01_trim_cerebellum/ --retain_unpaired -q 30 $i ${i/R1/R2}; done
+
+#Change directory to 01_trim_cerebellum
+[rhughes@cbix2 rnaseq_asgmt]$ cd ../analysis/01_trim_cerebellum/
+
+#align with STAR
+[rhughes@cbix2 01_trim_cerebellum]$ for i in *val_1.fq.gz; do STAR --genomeDir /mnt/data/gdata/human/hg38/chr21/STAR_index/ --readFilesIn $i ${i/R1_val_1/R2_val_2} --readFilesCommand zcat --outFileNamePrefix ../02_align/${i/R1*/} --outSAMtype BAM SortedByCoordinate; done
+
 ```
 ### Code for Frontal Cortex
 
-```{r}
+# Copy sample data to assignment directory
 [rhughes@cbix2 rnaseq_asgmt]$ cp -R /mnt/data/encode_tissue_data/frontal_cortex* /home/rhughes/rnaseq_asgmt/frontal_cortex
+
+#Move frontal cortex directory to data directory
 [rhughes@cbix2 rnaseq_asgmt]$ mv frontal_cortex data
+
+#Change directory to data 
 [rhughes@cbix2 rnaseq_asgmt]$ cd data/
+
+#Go to frontal cortex directory 
 [rhughes@cbix2 data]$ cd frontal_cortex
+
+#Make folder to put the output in
 [rhughes@cbix2 frontal_cortex]$ mkdir fastqc
+
+#run fastqc with a loop
 [rhughes@cbix2 frontal_cortex]$ fastqc *.fastq.gz -o fastqc/
+
+#Change directory to data
 [rhughes@cbix2 frontal_cortex]$ cd ../
+
+#Make a folder in the analysis folder to put the trimmed reads in
 [rhughes@cbix2 data]$ mkdir ../analysis/01_trim_frontal_cortex
+
+#Change directory to anaylsis
 [rhughes@cbix2 data]$ cd ../analysis/
+
+#Make a new directory to put the aligned files in
 [rhughes@cbix2 analysis]$ mkdir 02_align_frontal_cortex
+
+#Make a directory to put the count tables in
 [rhughes@cbix2 analysis]$ mkdir 03_count_frontal_cortex
+
+#Change directory to data
 [rhughes@cbix2 analysis]$ ../data/
+
+#trim with trim galore
 [rhughes@cbix2 data]$ for i in *R1.fastq.gz; do trim_galore --paired --fastqc --illumina --output /home/rhughes/rnaseq_asgmt/analysis/01_trim_frontal_cortex/ --retain_unpaired -q 30 $i ${i/R1/R2}; done
+
+#Change directory to 01_trim_frontal_cortex
+[rhughes@cbix2 data]$ cd ../analysis/01_trim_frontal_cortex
+
+#align with STAR
+[rhughes@cbix2 01_trim_frontal_cortex]$ for i in *val_1.fq.gz; do STAR --genomeDir /mnt/data/gdata/human/hg38/chr21/STAR_index/ --readFilesIn $i ${i/R1_val_1/R2_val_2} --readFilesCommand zcat --outFileNamePrefix ../02_align_frontal_cortex/${i/R1*/} --outSAMtype BAM SortedByCoordinate; done
+
+
+
 ```
 
 
