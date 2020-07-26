@@ -108,7 +108,6 @@
 [rhughes@cbix2 01_trim_frontal_cortex]$ for i in *val_1.fq.gz; do STAR --genomeDir /mnt/data/gdata/human/hg38/chr21/STAR_index/ --readFilesIn $i ${i/R1_val_1/R2_val_2} --readFilesCommand zcat --outFileNamePrefix ../02_align_frontal_cortex/${i/R1*/} --outSAMtype BAM SortedByCoordinate; done
 
 
-
 ```
 
 
